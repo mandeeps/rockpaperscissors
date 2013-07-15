@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app='myApp'>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width" user-scalable=no>
@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <div data-ng-controller='MainController'>
+  <div ng-controller='MainController'>
     <p>Hello, what is your name?</p>
     <input type='text' data-ng-model='name'/>
     <button>Submit</button>
