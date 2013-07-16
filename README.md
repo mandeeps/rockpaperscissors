@@ -1,4 +1,5 @@
-rockpaperscissors
+Rock Paper Scissors
 =================
 
-2 Player Rock-Paper-Scissors Web Game
+Learning CoffeeScript, Node+Express, Angular and Bootstrap by attempting to make
+a 2 player rock paper scissors game.
