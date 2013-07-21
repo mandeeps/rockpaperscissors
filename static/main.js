@@ -7,7 +7,6 @@
   angular.module('RPS').controller('AskForName', function($scope) {
     $scope.name = "Player";
     return $scope.submit = function() {
-      alert('submitted!');
       return $scope.greeting = "Hello " + $scope.name + "! Let's play Rock Paper Scissors...";
     };
   });
