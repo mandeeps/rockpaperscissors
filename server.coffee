@@ -1,13 +1,13 @@
-express = require('express')
-fs = require('fs')
+express = require 'express'
+fs = require 'fs'
 
-rps = express(express.logger())
-rps.use express.static(__dirname + '/static');
+rps = express express.logger()
+rps.use express.static __dirname + '/static'
 
 text = fs.readFileSync 'index.html'
 rps.get('/', (request, response) -> 
-  response.writeHead(200)
-  response.write(text)
+  response.writeHead 200
+  response.write text
   response.end()
 )
 
