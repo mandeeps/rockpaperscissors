@@ -3,6 +3,11 @@ fs = require 'fs'
 
 rps = express express.logger()
 rps.use express.static __dirname + '/static'
+http = require 'http'
+server = http.createServer rps
+io = require('socket.io').listen server
+io.sockets.on('connection', (client) ->
+  console.log('client connected...'))
 
 text = fs.readFileSync 'index.html'
 rps.get('/', (request, response) -> 

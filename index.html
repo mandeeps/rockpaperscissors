@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width" user-scalable=no>
   <meta name='apple-mobile-web-app-capable' content='yes'>
   <link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet'>
-  <link rel='stylesheet' type='text/css' href='style.css'>
+  <link rel='stylesheet' href='style.css'>
   <title>Rock, Paper, Scissors</title>
 </head>
 
@@ -15,9 +15,12 @@
     <input type='text' data-ng-model='name'/>
     <button ng-click='submit()'>Submit</button>
     <p>{{greeting}}</p>
+    <img src='icon.svg', width = 33%, height = 33% />
   </div>
   
   <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js'></script>
+  <script src='http://cdn.socket.io/stable/socket.io.js'></script>
+  <script src='services.js'></script>
   <script src='main.js'></script>
 </body>
 
