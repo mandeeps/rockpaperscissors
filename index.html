@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width" user-scalable=no>
+  <meta name='apple-mobile-web-app-capable' content='yes'>
+  <link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet'>
+  <link rel='stylesheet' href='static/style.css'>
+  <title>Rock, Paper, Scissors</title>
+</head>
+
+<body ng-app='RPS'>
+  <img src='static/icon.svg', width = 33%, height = 33% />
+  <div ng-controller='AskPlayer'>
+    <p>{{question}}</p>
+    <input type='text' data-ng-model='name'/>
+    <button ng-click='submit()'>Submit</button>
+    <p>{{response}}</p>
+  </div>
+  
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js'></script>
+  <script src='js/main.js'></script>
+</body>
+
+</html>
