@@ -1,3 +1,36 @@
 body {
   background-color: skyblue;
 }
+
+#icon {
+  display: block;
+  padding: 6px;
+  margin: auto;
+}
+
+#ask {
+  display: block;
+  margin: auto;
+  padding: 6px;
+}
+
+#choices {
+  width: 90%;
+  overflow: auto;
+}
+
+#list {
+  white-space: nowrap;
+}
+
+#list li {
+  display: inline;
+  list-style-type: none;
+  padding-left: 8px;
+  padding-right: 8px;
+  cursor: pointer;
+}
+
+#list li:hover {
+  opacity: 0.5;
+}

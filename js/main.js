@@ -4,16 +4,42 @@
 
   main = angular.module('RPS', []);
 
+  main.config(function($routeProvider) {
+    return $routeProvider.when('/page/:slug', {
+      templateUrl: 'partials/page.html',
+      controller: 'RouteController'
+    }).otherwise({
+      redirectTo: '/page/home'
+    });
+  });
+
+  angular.module('RPS').controller('RouteController', function($scope, $routeParams) {
+    var slug;
+    return slug = $routeParams.slug;
+  });
+
+  angular.module('RPS').controller('choices', function($scope) {
+    return $scope.images = [
+      {
+        'image': 'static/rock.svg'
+      }, {
+        'image': 'static/paper.svg'
+      }, {
+        'image': 'static/scissors.svg'
+      }
+    ];
+  });
+
   angular.module('RPS').controller('AskPlayer', function($scope) {
-    $scope.question = "Hello, what is your name?";
-    $scope.name = "Player";
+    $scope.question = 'Hello, what is your name?';
+    $scope.name = 'Player';
     return $scope.submit = function() {
       return $scope.response = "Hello " + $scope.name + "! Let's play Rock Paper Scissors...";
     };
   });
 
   angular.module('RPS').controller('ChooseRPS', function($scope) {
-    return $scope.choice = "";
+    return $scope.choice = '';
   });
 
 }).call(this);
