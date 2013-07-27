@@ -1,17 +1,15 @@
 body {
-  background-color: skyblue;
-}
-
-#icon {
-  display: block;
+  height: 100%;
+  background-color: lightblue;
   padding: 6px;
-  margin: auto;
+  text-align: center;
+  font-size: 18px;
 }
 
 #ask {
   display: block;
+  padding: 4px;
   margin: auto;
-  padding: 6px;
 }
 
 #choices {
@@ -26,8 +24,6 @@ body {
 #list li {
   display: inline;
   list-style-type: none;
-  padding-left: 8px;
-  padding-right: 8px;
   cursor: pointer;
 }
 

@@ -4,27 +4,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width" user-scalable=no>
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" media="screen">
   <link rel="stylesheet" href="static/style.css">
   <title>Rock, Paper, Scissors</title>
 </head>
 
 <body>
-  <img id="icon" src="static/icon.svg", width = 50%, height = 33%>
+  <img id="icon" src="static/icon.svg", width = 50%>
 
-  <div id="ask" ng-controller="AskPlayer">
-    <p>{{question}}</p>
-    <input type="text" data-ng-model="name">
-    <button ng-click="submit()">Submit</button>
-    <p>{{response}}</p>
-  </div>
-
-  <div id="choices" ng-controller="choices">
-    <ul id="list">
-      <li ng-repeat="image in images">
-        <img ng-src="{{image.image}}", width = 25%, height = 25%>
-      </li>
-    </ul>
+  <div class="container">
+    <div id="ask" ng-controller="AskPlayer">
+      <p>{{question}}</p>
+      <input type="text" class="input-block-level" autofocus data-ng-model="name">
+      <button class="btn btn-small btn-primary" type="submit" ng-click="submit()">Submit</button>
+      <p>{{response}}</p>
+    </div>
+  
+    <div id="choices" ng-controller="choices">
+      <ul id="list">
+        <li ng-repeat="image in images">
+          <img ng-src="{{image.image}}", width = 30%>
+        </li>
+      </ul>
+    </div>
   </div>
   
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
