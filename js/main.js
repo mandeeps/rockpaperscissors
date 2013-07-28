@@ -34,7 +34,7 @@
     $scope.question = 'Hello, what is your name?';
     $scope.name = 'Player';
     return $scope.submit = function() {
-      return $scope.response = "Hello " + $scope.name + "! Let's play Rock Paper Scissors...";
+      return alert('this is the part where I change the view...');
     };
   });
 

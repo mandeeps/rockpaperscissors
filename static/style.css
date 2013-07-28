@@ -1,14 +1,13 @@
 body {
   height: 100%;
   background-color: lightblue;
-  padding: 6px;
   text-align: center;
   font-size: 18px;
+  padding: 4px;
 }
 
 #ask {
   display: block;
-  padding: 4px;
   margin: auto;
 }
 
