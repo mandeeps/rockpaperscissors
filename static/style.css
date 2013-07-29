@@ -6,6 +6,11 @@ body {
   padding: 4px;
 }
 
+#icon {
+  display: block;
+  margin: auto;
+}
+
 #ask {
   display: block;
   margin: auto;

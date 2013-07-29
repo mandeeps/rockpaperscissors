@@ -6,28 +6,33 @@
 
   main.config(function($routeProvider) {
     return $routeProvider.when('/page/:slug', {
-      templateUrl: 'partials/page.html',
+      templateUrl: 'partials/name.html',
       controller: 'RouteController'
     }).otherwise({
       redirectTo: '/page/home'
     });
   });
 
-  angular.module('RPS').controller('RouteController', function($scope, $routeParams) {
+  angular.module('RPS').controller('RouteController', function($scope, $rootScope, $routeParams) {
     var slug;
-    return slug = $routeParams.slug;
+    slug = $routeParams.slug;
+    return $scope.page = $rootScope.pages[slug];
+  });
+
+  angular.module('RPS').controller('AppController', function($scope, $rootScope) {
+    return $rootScope.pages = {
+      "home": "This is the home page. Welcome",
+      "name": "partials/name.html",
+      "contact": "This is the contact page. Welcome"
+    };
   });
 
   angular.module('RPS').controller('choices', function($scope) {
-    return $scope.images = [
-      {
-        'image': 'static/rock.svg'
-      }, {
-        'image': 'static/paper.svg'
-      }, {
-        'image': 'static/scissors.svg'
-      }
-    ];
+    return $scope.images = {
+      'image': 'static/rock.svg',
+      'image': 'static/paper.svg',
+      'image': 'static/scissors.svg'
+    };
   });
 
   angular.module('RPS').controller('AskPlayer', function($scope) {
@@ -36,10 +41,6 @@
     return $scope.submit = function() {
       return alert('this is the part where I change the view...');
     };
-  });
-
-  angular.module('RPS').controller('ChooseRPS', function($scope) {
-    return $scope.choice = '';
   });
 
 }).call(this);
