@@ -3,17 +3,20 @@ body {
   background-color: lightblue;
   text-align: center;
   font-size: 18px;
-  padding: 4px;
+  padding: 20px 4px 4px 4px;
+  font-family: "Abel", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 22px;
 }
 
 #icon {
   display: block;
-  margin: auto;
+  margin: 0 auto;
 }
 
 #ask {
   display: block;
-  margin: auto;
+  margin: 0 auto;
 }
 
 #choices {
