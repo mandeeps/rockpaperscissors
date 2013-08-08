@@ -2,14 +2,14 @@
 (function() {
   var main;
 
-  main = angular.module('RPS', []);
+  main = angular.module('RPS', ['ui.bootstrap']);
 
   main.config(function($routeProvider) {
     return $routeProvider.when('/page/:slug', {
       templateUrl: 'partials/page.html',
       controller: 'RouteController'
     }).otherwise({
-      redirectTo: 'page/home'
+      redirectTo: 'page/name'
     });
   });
 
@@ -21,8 +21,7 @@
 
   angular.module('RPS').controller('AppController', function($scope, $rootScope) {
     return $rootScope.pages = {
-      "home": "This is the home page.",
-      "name": "this will be the part where you enter your name...",
+      "name": "part where player name entered",
       "contact": "This is the contact page."
     };
   });
