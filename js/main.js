@@ -28,9 +28,15 @@
 
   angular.module('RPS').controller('choices', function($scope) {
     return $scope.images = {
-      'image': 'static/rock.svg',
-      'image': 'static/paper.svg',
-      'image': 'static/scissors.svg'
+      'rock': {
+        image: 'static/rock.svg'
+      },
+      'paper': {
+        image: 'static/paper.svg'
+      },
+      'scissors': {
+        image: 'static/scissors.svg'
+      }
     };
   });
 

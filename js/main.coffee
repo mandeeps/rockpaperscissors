@@ -16,9 +16,12 @@ angular.module('RPS').controller 'AppController', ($scope, $rootScope) ->
 
 angular.module('RPS').controller 'choices', ($scope) ->
   $scope.images =
-    'image': 'static/rock.svg'
-    'image': 'static/paper.svg'
-    'image': 'static/scissors.svg'
+    'rock':
+      image: 'static/rock.svg'
+    'paper':
+      image: 'static/paper.svg'
+    'scissors': 
+      image: 'static/scissors.svg'
 
 angular.module('RPS').controller 'AskPlayer', ($scope) ->
   $scope.question = 'Hello, what is your name?'
