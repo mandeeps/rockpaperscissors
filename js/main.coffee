@@ -1,20 +1,21 @@
-main = angular.module('RPS',['ui.bootstrap'])
+main = angular.module('RPS',['ui.bootstrap']).
+  config ($routeProvider) ->
+    $routeProvider
+#      .when('/page/:slug', {templateUrl: 'partials/page.html', controller: 'RouteController'})
+      .when('/name', {templateUrl: 'partials/name.html', controller: 'AskName'})
+      .when('/choice', {templateUrl: 'partials/choice.html', controller: 'ChooseRPS'})
+      .otherwise {redirectTo: '/name'}
 
-main.config ($routeProvider) ->
-  $routeProvider
-    .when('/page/:slug', {templateUrl: 'partials/page.html', controller: 'RouteController'})
-    .otherwise {redirectTo: 'page/name'}
+#angular.module('RPS').controller 'RouteController', ($scope, $rootScope, $routeParams) ->
+#  slug = $routeParams.slug
+#  $scope.page = $rootScope.pages[slug]
 
-angular.module('RPS').controller 'RouteController', ($scope, $rootScope, $routeParams) ->
-  slug = $routeParams.slug
-  $scope.page = $rootScope.pages[slug]
+#angular.module('RPS').controller 'AppController', ($scope, $rootScope) ->
+#  $rootScope.pages =
+#    "name": "part where player name entered"
+#    "contact": "This is the contact page."
 
-angular.module('RPS').controller 'AppController', ($scope, $rootScope) ->
-  $rootScope.pages =
-    "name": "part where player name entered"
-    "contact": "This is the contact page."
-
-angular.module('RPS').controller 'choices', ($scope) ->
+angular.module('RPS').controller 'ChooseRPS', ($scope) ->
   $scope.images =
     'rock':
       image: 'static/rock.svg'
@@ -23,7 +24,7 @@ angular.module('RPS').controller 'choices', ($scope) ->
     'scissors': 
       image: 'static/scissors.svg'
 
-angular.module('RPS').controller 'AskPlayer', ($scope) ->
+angular.module('RPS').controller 'AskName', ($scope) ->
   $scope.question = 'Hello, what is your name?'
   $scope.name = 'Player'
   $scope.submit = ->
