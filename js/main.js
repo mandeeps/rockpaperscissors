@@ -2,19 +2,26 @@
 (function() {
   var main;
 
-  main = angular.module('RPS', ['ui.bootstrap']).config(function($routeProvider) {
-    return $routeProvider.when('/name', {
-      templateUrl: 'partials/name.html',
+  main = angular.module('RPS', ['ui.bootstrap']).config(function($routeProvider, $locationProvider) {
+    return $routeProvider.when('/play', {
+      templateUrl: 'partials/play.html',
       controller: 'AskName'
     }).when('/choice', {
       templateUrl: 'partials/choice.html',
       controller: 'ChooseRPS'
+    }).when('/about', {
+      templateUrl: 'partials/about.html',
+      controller: 'about'
+    }).when('/howto', {
+      templateUrl: 'partials/howto.html',
+      controller: 'howto'
     }).otherwise({
-      redirectTo: '/name'
+      redirectTo: '/about'
     });
   });
 
-  angular.module('RPS').controller('ChooseRPS', function($scope) {
+  angular.module('RPS').controller('ChooseRPS', function($scope, $rootScope) {
+    $scope.message = "OK " + $rootScope.name + "! Choose Rock, Paper or Scissors!";
     return $scope.images = {
       'rock': {
         image: 'static/rock.svg'
@@ -28,12 +35,17 @@
     };
   });
 
-  angular.module('RPS').controller('AskName', function($scope) {
-    $scope.question = 'Hello, what is your name?';
+  angular.module('RPS').controller('AskName', function($scope, $rootScope, $location) {
+    $scope.message = 'Hello, what is your name?';
     $scope.name = 'Player';
     return $scope.submit = function() {
-      return alert('this is the part where I change the view...');
+      $rootScope.name = $scope.name;
+      return $location.path('choice');
     };
   });
+
+  angular.module('RPS').controller('about', function() {});
+
+  angular.module('RPS').controller('howto', function() {});
 
 }).call(this);
