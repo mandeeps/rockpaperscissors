@@ -1,5 +1,8 @@
-body {
+html,body {
   height: 100%;
+}
+
+body {
   background-color: rgb(252, 245, 216);
   text-align: center;
   font-size: 18px;
@@ -9,10 +12,12 @@ body {
   font-size: 22px;
 }
 
+/*
 #icon {
   display: block;
   margin: 0 auto;
 }
+*/
 
 #ask {
   display: block;

@@ -1,9 +1,8 @@
 <div id="choices" ng-controller="ChooseRPS">
   <p>{{message}}</p>
-  <br>
   <ul id="list">
     <li ng-repeat="image in images">
-      <img ng-src="{{image.image}}" width=30%>
+      <img ng-src="{{image.image}}" ng-click="select(image.name)" width="30%"></img>
     </li>
   </ul>
 </div>
