@@ -10,6 +10,9 @@
     }).when('/choice', {
       templateUrl: 'partials/choice.html',
       controller: 'ChooseRPS'
+    }).when('/end', {
+      templateUrl: 'partials/end.html',
+      controller: 'Final'
     }).when('/about', {
       templateUrl: 'partials/about.html',
       controller: 'about'
@@ -27,7 +30,16 @@
   */
 
 
-  angular.module('RPS').controller('ChooseRPS', function($scope, $rootScope) {
+  angular.module('RPS').controller('AskName', function($scope, $rootScope, $location) {
+    $scope.message = 'Hello, what is your name?';
+    $scope.name = 'Player';
+    return $scope.submit = function() {
+      $rootScope.name = $scope.name;
+      return $location.path('choice');
+    };
+  });
+
+  angular.module('RPS').controller('ChooseRPS', function($scope, $rootScope, $location) {
     $scope.message = "OK " + $rootScope.name + "! Choose Rock, Paper or Scissors!";
     $scope.images = {
       rock: {
@@ -45,17 +57,14 @@
     };
     return $scope.select = function(choice) {
       $rootScope.choice = choice;
-      return alert('your choice is ' + $rootScope.choice);
+      return $location.path('end');
     };
   });
 
-  angular.module('RPS').controller('AskName', function($scope, $rootScope, $location) {
-    $scope.message = 'Hello, what is your name?';
-    $scope.name = 'Player';
-    return $scope.submit = function() {
-      $rootScope.name = $scope.name;
-      return $location.path('choice');
-    };
+  angular.module('RPS').controller('Final', function($scope, $rootScope) {
+    $scope.comp = '';
+    $scope.condition = '';
+    return $scope.message = $rootScope.name + ', you ' + $scope.condition + '!';
   });
 
   angular.module('RPS').controller('about', function() {});

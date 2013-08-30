@@ -5,6 +5,7 @@ main = angular.module('RPS',[]). #'ui.bootstrap'
 #      .when('/page/:slug', {templateUrl: 'partials/page.html', controller: 'RouteController'})
       .when('/play', {templateUrl: 'partials/play.html', controller: 'AskName'})
       .when('/choice', {templateUrl: 'partials/choice.html', controller: 'ChooseRPS'})
+      .when('/end', {templateUrl: 'partials/end.html', controller: 'Final'})
       .when('/about', {templateUrl: 'partials/about.html', controller: 'about'})
       .when('/howto', {templateUrl: 'partials/howto.html', controller: 'howto'})
       .otherwise {redirectTo: '/about'}
@@ -23,7 +24,14 @@ main = angular.module('RPS',[]). #'ui.bootstrap'
 #    "name": "part where player name entered"
 #    "contact": "This is the contact page."
 
-angular.module('RPS').controller 'ChooseRPS', ($scope, $rootScope) ->
+angular.module('RPS').controller 'AskName', ($scope, $rootScope, $location) ->
+  $scope.message = 'Hello, what is your name?'
+  $scope.name = 'Player'
+  $scope.submit = ->
+    $rootScope.name = $scope.name
+    $location.path 'choice'
+
+angular.module('RPS').controller 'ChooseRPS', ($scope, $rootScope, $location) ->
   $scope.message = "OK " + $rootScope.name + "! Choose Rock, Paper or Scissors!"
   $scope.images =
     rock:
@@ -38,14 +46,12 @@ angular.module('RPS').controller 'ChooseRPS', ($scope, $rootScope) ->
 
   $scope.select = (choice) ->
     $rootScope.choice = choice
-    alert('your choice is ' + $rootScope.choice)
+    $location.path 'end'
 
-angular.module('RPS').controller 'AskName', ($scope, $rootScope, $location) ->
-  $scope.message = 'Hello, what is your name?'
-  $scope.name = 'Player'
-  $scope.submit = ->
-    $rootScope.name = $scope.name
-    $location.path 'choice'
+angular.module('RPS').controller 'Final', ($scope, $rootScope) ->
+  $scope.comp = ''
+  $scope.condition = ''
+  $scope.message = $rootScope.name + ', you ' + $scope.condition + '!'
 
 angular.module('RPS').controller 'about', () ->
 
