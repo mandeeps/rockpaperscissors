@@ -40,7 +40,7 @@
   });
 
   angular.module('RPS').controller('ChooseRPS', function($scope, $rootScope, $location) {
-    $scope.message = "OK " + $rootScope.name + "! Choose Rock, Paper or Scissors!";
+    $scope.message = "OK " + $rootScope.name + "! \n Choose Rock, Paper or Scissors!";
     $scope.images = {
       rock: {
         image: 'static/rock.svg',
@@ -62,9 +62,32 @@
   });
 
   angular.module('RPS').controller('Final', function($scope, $rootScope) {
-    $scope.comp = '';
-    $scope.condition = '';
-    return $scope.message = $rootScope.name + ', you ' + $scope.condition + '!';
+    var rand, result, select;
+    select = ['rock', 'paper', 'scissors'];
+    rand = Math.floor(Math.random() * select.length);
+    $scope.comp = select[rand];
+    if ($rootScope.choice === $scope.comp) {
+      result = 'tie';
+    }
+    if ($rootScope.choice === 'rock' && $scope.comp === 'paper') {
+      result = 'lose';
+    }
+    if ($rootScope.choice === 'rock' && $scope.comp === 'scissors') {
+      result = 'win';
+    }
+    if ($rootScope.choice === 'paper' && $scope.comp === 'rock') {
+      result = 'win';
+    }
+    if ($rootScope.choice === 'paper' && $scope.comp === 'scissors') {
+      result = 'lose';
+    }
+    if ($rootScope.choice === 'scissors' && $scope.comp === 'rock') {
+      result = 'lose';
+    }
+    if ($rootScope.choice === 'scissors' && $scope.comp === 'paper') {
+      result = 'win';
+    }
+    return $scope.message = $rootScope.name + ', you ' + result + '!';
   });
 
   angular.module('RPS').controller('about', function() {});

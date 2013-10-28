@@ -32,7 +32,7 @@ angular.module('RPS').controller 'AskName', ($scope, $rootScope, $location) ->
     $location.path 'choice'
 
 angular.module('RPS').controller 'ChooseRPS', ($scope, $rootScope, $location) ->
-  $scope.message = "OK " + $rootScope.name + "! Choose Rock, Paper or Scissors!"
+  $scope.message = "OK " + $rootScope.name + "! \n Choose Rock, Paper or Scissors!"
   $scope.images =
     rock:
       image: 'static/rock.svg'
@@ -49,11 +49,19 @@ angular.module('RPS').controller 'ChooseRPS', ($scope, $rootScope, $location) ->
     $location.path 'end'
 
 angular.module('RPS').controller 'Final', ($scope, $rootScope) ->
-  $scope.comp = ''
-  $scope.condition = ''
-  $scope.message = $rootScope.name + ', you ' + $scope.condition + '!'
+  select = ['rock', 'paper', 'scissors']
+  rand = Math.floor(Math.random() * select.length)
+  $scope.comp = select[rand]
+  if $rootScope.choice is $scope.comp then result = 'tie'
+  if $rootScope.choice is 'rock' and $scope.comp is 'paper' then result = 'lose'
+  if $rootScope.choice is 'rock' and $scope.comp is 'scissors' then result = 'win'
+  if $rootScope.choice is 'paper' and $scope.comp is 'rock' then result = 'win'
+  if $rootScope.choice is 'paper' and $scope.comp is 'scissors' then result = 'lose'
+  if $rootScope.choice is 'scissors' and $scope.comp is 'rock' then result = 'lose'
+  if $rootScope.choice is 'scissors' and $scope.comp is 'paper' then result = 'win'
+  #$scope.condition = result
+  $scope.message = $rootScope.name + ', you ' + result + '!'
 
 angular.module('RPS').controller 'about', () ->
 
 angular.module('RPS').controller 'howto', () ->
-
