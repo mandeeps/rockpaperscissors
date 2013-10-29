@@ -24,12 +24,6 @@
     });
   });
 
-  /* main.config(['$locationProvider', ($location) -> 
-    $location.html5Mode true
-  ])
-  */
-
-
   angular.module('RPS').controller('AskName', function($scope, $rootScope, $location) {
     $scope.message = 'Hello, what is your name?';
     $scope.name = 'Player';
@@ -40,7 +34,7 @@
   });
 
   angular.module('RPS').controller('ChooseRPS', function($scope, $rootScope, $location) {
-    $scope.message = "OK " + $rootScope.name + "! \n Choose Rock, Paper or Scissors!";
+    $scope.message = "OK " + $rootScope.name + "! Choose Rock, Paper or Scissors!";
     $scope.images = {
       rock: {
         image: 'static/rock.svg',
