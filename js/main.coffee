@@ -33,11 +33,11 @@ angular.module('RPS').controller 'ChooseRPS', ($scope, $rootScope, $location) ->
     $rootScope.choice = choice
     $location.path 'end'
 
-angular.module('RPS').controller 'Final', ($scope, $rootScope) ->
+angular.module('RPS').controller 'Final', ($scope, $rootScope, $location) ->
   select = ['rock', 'paper', 'scissors']
   rand = Math.floor(Math.random() * select.length)
   $scope.comp = select[rand]
-  if $rootScope.choice is $scope.comp then result = 'tie'
+  if $rootScope.choice is $scope.comp then result = 'tied'
   if $rootScope.choice is 'rock' and $scope.comp is 'paper' then result = 'lose'
   if $rootScope.choice is 'rock' and $scope.comp is 'scissors' then result = 'win'
   if $rootScope.choice is 'paper' and $scope.comp is 'rock' then result = 'win'
@@ -45,6 +45,12 @@ angular.module('RPS').controller 'Final', ($scope, $rootScope) ->
   if $rootScope.choice is 'scissors' and $scope.comp is 'rock' then result = 'lose'
   if $rootScope.choice is 'scissors' and $scope.comp is 'paper' then result = 'win'
   $scope.message = $rootScope.name + ', you ' + result + '!'
+  $scope.click = ->
+    $location.path 'choice'
 
-angular.module('RPS').controller 'about', () ->
+angular.module('RPS').controller 'about', ($scope, $location) ->
+  $scope.click = ->
+    $location.path 'play'
+
+
 angular.module('RPS').controller 'howto', () ->

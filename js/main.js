@@ -55,13 +55,13 @@
     };
   });
 
-  angular.module('RPS').controller('Final', function($scope, $rootScope) {
+  angular.module('RPS').controller('Final', function($scope, $rootScope, $location) {
     var rand, result, select;
     select = ['rock', 'paper', 'scissors'];
     rand = Math.floor(Math.random() * select.length);
     $scope.comp = select[rand];
     if ($rootScope.choice === $scope.comp) {
-      result = 'tie';
+      result = 'tied';
     }
     if ($rootScope.choice === 'rock' && $scope.comp === 'paper') {
       result = 'lose';
@@ -81,10 +81,17 @@
     if ($rootScope.choice === 'scissors' && $scope.comp === 'paper') {
       result = 'win';
     }
-    return $scope.message = $rootScope.name + ', you ' + result + '!';
+    $scope.message = $rootScope.name + ', you ' + result + '!';
+    return $scope.click = function() {
+      return $location.path('choice');
+    };
   });
 
-  angular.module('RPS').controller('about', function() {});
+  angular.module('RPS').controller('about', function($scope, $location) {
+    return $scope.click = function() {
+      return $location.path('play');
+    };
+  });
 
   angular.module('RPS').controller('howto', function() {});
 
