@@ -16,25 +16,31 @@
     }).when('/about', {
       templateUrl: 'partials/about.html',
       controller: 'about'
-    }).when('/howto', {
-      templateUrl: 'partials/howto.html',
-      controller: 'howto'
     }).otherwise({
       redirectTo: '/about'
     });
   });
 
-  angular.module('RPS').controller('AskName', function($scope, $rootScope, $location) {
+  main.service('sharedData', function() {
+    this.name = function() {
+      return 'name';
+    };
+    return this.choice = function() {
+      return 'choice';
+    };
+  });
+
+  main.controller('AskName', function($scope, sharedData, $location) {
     $scope.message = 'Hello, what is your name?';
     $scope.name = 'Player';
     return $scope.submit = function() {
-      $rootScope.name = $scope.name;
+      sharedData.name = $scope.name;
       return $location.path('choice');
     };
   });
 
-  angular.module('RPS').controller('ChooseRPS', function($scope, $rootScope, $location) {
-    $scope.message = "OK " + $rootScope.name + "! Choose Rock, Paper or Scissors!";
+  main.controller('ChooseRPS', function($scope, sharedData, $location) {
+    $scope.message = "OK " + sharedData.name + "! Choose Rock, Paper or Scissors!";
     $scope.images = {
       rock: {
         image: 'static/rock.svg',
@@ -50,49 +56,49 @@
       }
     };
     return $scope.select = function(choice) {
-      $rootScope.choice = choice;
+      sharedData.choice = choice;
       return $location.path('end');
     };
   });
 
-  angular.module('RPS').controller('Final', function($scope, $rootScope, $location) {
+  main.controller('Final', function($scope, sharedData, $location) {
     var rand, result, select;
+    $scope.name = sharedData.name;
+    $scope.choice = sharedData.choice;
     select = ['rock', 'paper', 'scissors'];
     rand = Math.floor(Math.random() * select.length);
     $scope.comp = select[rand];
-    if ($rootScope.choice === $scope.comp) {
+    if (sharedData.choice === $scope.comp) {
       result = 'tied';
     }
-    if ($rootScope.choice === 'rock' && $scope.comp === 'paper') {
+    if (sharedData.choice === 'rock' && $scope.comp === 'paper') {
       result = 'lose';
     }
-    if ($rootScope.choice === 'rock' && $scope.comp === 'scissors') {
+    if (sharedData.choice === 'rock' && $scope.comp === 'scissors') {
       result = 'win';
     }
-    if ($rootScope.choice === 'paper' && $scope.comp === 'rock') {
+    if (sharedData.choice === 'paper' && $scope.comp === 'rock') {
       result = 'win';
     }
-    if ($rootScope.choice === 'paper' && $scope.comp === 'scissors') {
+    if (sharedData.choice === 'paper' && $scope.comp === 'scissors') {
       result = 'lose';
     }
-    if ($rootScope.choice === 'scissors' && $scope.comp === 'rock') {
+    if (sharedData.choice === 'scissors' && $scope.comp === 'rock') {
       result = 'lose';
     }
-    if ($rootScope.choice === 'scissors' && $scope.comp === 'paper') {
+    if (sharedData.choice === 'scissors' && $scope.comp === 'paper') {
       result = 'win';
     }
-    $scope.message = $rootScope.name + ', you ' + result + '!';
+    $scope.message = sharedData.name + ', you ' + result + '!';
     return $scope.click = function() {
       return $location.path('choice');
     };
   });
 
-  angular.module('RPS').controller('about', function($scope, $location) {
+  main.controller('about', function($scope, $location) {
     return $scope.click = function() {
       return $location.path('play');
     };
   });
-
-  angular.module('RPS').controller('howto', function() {});
 
 }).call(this);

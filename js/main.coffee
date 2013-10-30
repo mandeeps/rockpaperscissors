@@ -1,23 +1,28 @@
 "use strict"
-main = angular.module('RPS',[]). #'ui.bootstrap'
-  config ($routeProvider) ->
+main = angular.module('RPS',[]) #'ui.bootstrap'
+  .config ($routeProvider) ->
     $routeProvider
       .when('/play', {templateUrl: 'partials/play.html', controller: 'AskName'})
       .when('/choice', {templateUrl: 'partials/choice.html', controller: 'ChooseRPS'})
       .when('/end', {templateUrl: 'partials/end.html', controller: 'Final'})
       .when('/about', {templateUrl: 'partials/about.html', controller: 'about'})
-      .when('/howto', {templateUrl: 'partials/howto.html', controller: 'howto'})
       .otherwise {redirectTo: '/about'}
 
-angular.module('RPS').controller 'AskName', ($scope, $rootScope, $location) ->
+main.service 'sharedData', ->
+  this.name = ->
+    return 'name'
+  this.choice = ->
+    return 'choice'
+
+main.controller 'AskName', ($scope, sharedData, $location) ->
   $scope.message = 'Hello, what is your name?'
   $scope.name = 'Player'
   $scope.submit = ->
-    $rootScope.name = $scope.name
+    sharedData.name = $scope.name
     $location.path 'choice'
 
-angular.module('RPS').controller 'ChooseRPS', ($scope, $rootScope, $location) ->
-  $scope.message = "OK " + $rootScope.name + "! Choose Rock, Paper or Scissors!"
+main.controller 'ChooseRPS', ($scope, sharedData, $location) ->
+  $scope.message = "OK " + sharedData.name + "! Choose Rock, Paper or Scissors!"
   $scope.images =
     rock:
       image: 'static/rock.svg'
@@ -30,27 +35,26 @@ angular.module('RPS').controller 'ChooseRPS', ($scope, $rootScope, $location) ->
       name: 'scissors'
 
   $scope.select = (choice) ->
-    $rootScope.choice = choice
+    sharedData.choice = choice
     $location.path 'end'
 
-angular.module('RPS').controller 'Final', ($scope, $rootScope, $location) ->
+main.controller 'Final', ($scope, sharedData, $location) ->
+  $scope.name = sharedData.name
+  $scope.choice = sharedData.choice
   select = ['rock', 'paper', 'scissors']
   rand = Math.floor(Math.random() * select.length)
   $scope.comp = select[rand]
-  if $rootScope.choice is $scope.comp then result = 'tied'
-  if $rootScope.choice is 'rock' and $scope.comp is 'paper' then result = 'lose'
-  if $rootScope.choice is 'rock' and $scope.comp is 'scissors' then result = 'win'
-  if $rootScope.choice is 'paper' and $scope.comp is 'rock' then result = 'win'
-  if $rootScope.choice is 'paper' and $scope.comp is 'scissors' then result = 'lose'
-  if $rootScope.choice is 'scissors' and $scope.comp is 'rock' then result = 'lose'
-  if $rootScope.choice is 'scissors' and $scope.comp is 'paper' then result = 'win'
-  $scope.message = $rootScope.name + ', you ' + result + '!'
+  if sharedData.choice is $scope.comp then result = 'tied'
+  if sharedData.choice is 'rock' and $scope.comp is 'paper' then result = 'lose'
+  if sharedData.choice is 'rock' and $scope.comp is 'scissors' then result = 'win'
+  if sharedData.choice is 'paper' and $scope.comp is 'rock' then result = 'win'
+  if sharedData.choice is 'paper' and $scope.comp is 'scissors' then result = 'lose'
+  if sharedData.choice is 'scissors' and $scope.comp is 'rock' then result = 'lose'
+  if sharedData.choice is 'scissors' and $scope.comp is 'paper' then result = 'win'
+  $scope.message = sharedData.name + ', you ' + result + '!'
   $scope.click = ->
     $location.path 'choice'
 
-angular.module('RPS').controller 'about', ($scope, $location) ->
+main.controller 'about', ($scope, $location) ->
   $scope.click = ->
     $location.path 'play'
-
-
-angular.module('RPS').controller 'howto', () ->
