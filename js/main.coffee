@@ -1,27 +1,31 @@
 "use strict"
-main = angular.module('RPS',[]) #'ui.bootstrap'
-  .config ($routeProvider) ->
+main = angular.module('RPS',[])
+###  .config ($routeProvider) ->
     $routeProvider
       .when('/play', {templateUrl: 'partials/play.html', controller: 'AskName'})
       .when('/choice', {templateUrl: 'partials/choice.html', controller: 'ChooseRPS'})
       .when('/end', {templateUrl: 'partials/end.html', controller: 'Final'})
       .when('/about', {templateUrl: 'partials/about.html', controller: 'about'})
       .otherwise {redirectTo: '/about'}
-
+###
 main.service 'sharedData', ->
   this.name = ->
     return 'name'
   this.choice = ->
     return 'choice'
+  this.view = 'partials/about.html'
 
-main.controller 'AskName', ($scope, sharedData, $location) ->
+main.controller 'Partials', ($scope, sharedData) ->
+  $scope.data = sharedData
+
+main.controller 'AskName', ($scope, sharedData) ->
   $scope.message = 'Hello, what is your name?'
   $scope.name = 'Player'
   $scope.submit = ->
     sharedData.name = $scope.name
-    $location.path 'choice'
+    sharedData.view = 'partials/choice.html'
 
-main.controller 'ChooseRPS', ($scope, sharedData, $location) ->
+main.controller 'ChooseRPS', ($scope, sharedData) ->
   $scope.message = "OK " + sharedData.name + "! Choose Rock, Paper or Scissors!"
   $scope.images =
     rock:
@@ -36,9 +40,9 @@ main.controller 'ChooseRPS', ($scope, sharedData, $location) ->
 
   $scope.select = (choice) ->
     sharedData.choice = choice
-    $location.path 'end'
+    sharedData.view = 'partials/end.html'
 
-main.controller 'Final', ($scope, sharedData, $location) ->
+main.controller 'Final', ($scope, sharedData) ->
   $scope.name = sharedData.name
   $scope.choice = sharedData.choice
   select = ['rock', 'paper', 'scissors']
@@ -53,8 +57,8 @@ main.controller 'Final', ($scope, sharedData, $location) ->
   if sharedData.choice is 'scissors' and $scope.comp is 'paper' then result = 'win'
   $scope.message = sharedData.name + ', you ' + result + '!'
   $scope.click = ->
-    $location.path 'choice'
+    sharedData.view = 'partials/choice.html'
 
-main.controller 'about', ($scope, $location) ->
+main.controller 'about', ($scope, sharedData) ->
   $scope.click = ->
-    $location.path 'play'
+    sharedData.view = 'partials/play.html'

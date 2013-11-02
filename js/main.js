@@ -3,43 +3,42 @@
   "use strict";
   var main;
 
-  main = angular.module('RPS', []).config(function($routeProvider) {
-    return $routeProvider.when('/play', {
-      templateUrl: 'partials/play.html',
-      controller: 'AskName'
-    }).when('/choice', {
-      templateUrl: 'partials/choice.html',
-      controller: 'ChooseRPS'
-    }).when('/end', {
-      templateUrl: 'partials/end.html',
-      controller: 'Final'
-    }).when('/about', {
-      templateUrl: 'partials/about.html',
-      controller: 'about'
-    }).otherwise({
-      redirectTo: '/about'
-    });
-  });
+  main = angular.module('RPS', []);
+
+  /*  .config ($routeProvider) ->
+      $routeProvider
+        .when('/play', {templateUrl: 'partials/play.html', controller: 'AskName'})
+        .when('/choice', {templateUrl: 'partials/choice.html', controller: 'ChooseRPS'})
+        .when('/end', {templateUrl: 'partials/end.html', controller: 'Final'})
+        .when('/about', {templateUrl: 'partials/about.html', controller: 'about'})
+        .otherwise {redirectTo: '/about'}
+  */
+
 
   main.service('sharedData', function() {
     this.name = function() {
       return 'name';
     };
-    return this.choice = function() {
+    this.choice = function() {
       return 'choice';
     };
+    return this.view = 'partials/about.html';
   });
 
-  main.controller('AskName', function($scope, sharedData, $location) {
+  main.controller('Partials', function($scope, sharedData) {
+    return $scope.data = sharedData;
+  });
+
+  main.controller('AskName', function($scope, sharedData) {
     $scope.message = 'Hello, what is your name?';
     $scope.name = 'Player';
     return $scope.submit = function() {
       sharedData.name = $scope.name;
-      return $location.path('choice');
+      return sharedData.view = 'partials/choice.html';
     };
   });
 
-  main.controller('ChooseRPS', function($scope, sharedData, $location) {
+  main.controller('ChooseRPS', function($scope, sharedData) {
     $scope.message = "OK " + sharedData.name + "! Choose Rock, Paper or Scissors!";
     $scope.images = {
       rock: {
@@ -57,11 +56,11 @@
     };
     return $scope.select = function(choice) {
       sharedData.choice = choice;
-      return $location.path('end');
+      return sharedData.view = 'partials/end.html';
     };
   });
 
-  main.controller('Final', function($scope, sharedData, $location) {
+  main.controller('Final', function($scope, sharedData) {
     var rand, result, select;
     $scope.name = sharedData.name;
     $scope.choice = sharedData.choice;
@@ -91,13 +90,13 @@
     }
     $scope.message = sharedData.name + ', you ' + result + '!';
     return $scope.click = function() {
-      return $location.path('choice');
+      return sharedData.view = 'partials/choice.html';
     };
   });
 
-  main.controller('about', function($scope, $location) {
+  main.controller('about', function($scope, sharedData) {
     return $scope.click = function() {
-      return $location.path('play');
+      return sharedData.view = 'partials/play.html';
     };
   });
 

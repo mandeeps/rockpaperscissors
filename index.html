@@ -16,12 +16,12 @@
       <div class="col-sm-6 col-sm-offset-3">
         <center><img class="img-responsive icon" height="50%" width="50%" src="static/icon.svg"></center>
         <br>
-        <div ng-view></div>
+        <div ng-controller="Partials" ng-include="data.view"></div>
       </div>
     </div>
   </div>
   
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
