@@ -1,13 +1,6 @@
 "use strict"
 main = angular.module('RPS',[])
-###  .config ($routeProvider) ->
-    $routeProvider
-      .when('/play', {templateUrl: 'partials/play.html', controller: 'AskName'})
-      .when('/choice', {templateUrl: 'partials/choice.html', controller: 'ChooseRPS'})
-      .when('/end', {templateUrl: 'partials/end.html', controller: 'Final'})
-      .when('/about', {templateUrl: 'partials/about.html', controller: 'about'})
-      .otherwise {redirectTo: '/about'}
-###
+
 main.service 'sharedData', ->
   this.name = ->
     return 'name'
