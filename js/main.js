@@ -23,8 +23,12 @@
     $scope.message = 'Hello, what is your name?';
     $scope.name = 'Player';
     return $scope.submit = function() {
-      sharedData.name = $scope.name;
-      return sharedData.view = 'partials/choice.html';
+      if ($scope.name != null) {
+        sharedData.name = $scope.name;
+      }
+      if ($scope.name != null) {
+        return sharedData.view = 'partials/choice.html';
+      }
     };
   });
 

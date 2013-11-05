@@ -15,8 +15,8 @@ main.controller 'AskName', ($scope, sharedData) ->
   $scope.message = 'Hello, what is your name?'
   $scope.name = 'Player'
   $scope.submit = ->
-    sharedData.name = $scope.name
-    sharedData.view = 'partials/choice.html'
+    sharedData.name = $scope.name if $scope.name?
+    sharedData.view = 'partials/choice.html' if $scope.name?
 
 main.controller 'ChooseRPS', ($scope, sharedData) ->
   $scope.message = "OK " + sharedData.name + "! Choose Rock, Paper or Scissors!"
