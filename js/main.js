@@ -3,6 +3,10 @@
   "use strict";
   var main;
 
+  window.addEventListener('load', function() {
+    return FastClick.attach(document.body);
+  }, false);
+
   main = angular.module('RPS', []);
 
   main.service('sharedData', function() {

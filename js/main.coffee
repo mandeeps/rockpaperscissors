@@ -1,4 +1,9 @@
 "use strict"
+
+window.addEventListener 'load', ->
+  FastClick.attach document.body
+,false
+
 main = angular.module('RPS',[])
 
 main.service 'sharedData', ->
