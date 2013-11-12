@@ -1,0 +1,8 @@
+<div id="ask" ng-controller="AskName">
+  <p>{{message}}</p>
+  <form ng-submit="submit()">
+    <input required type="text" class="input-block-level" autofocus ng-model="name">
+    <br>
+    <button class="btn btn-small btn-primary" type="submit" ng-click="submit()">Submit</button>
+  </form>
+</div>
