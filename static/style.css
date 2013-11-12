@@ -1,0 +1,44 @@
+html,body {
+  height: 100%;
+}
+
+body {
+  background-color: rgb(252, 245, 216);
+  text-align: center;
+  font-size: 18px;
+  padding: 20px 4px 4px 4px;
+  font-family: "Abel", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 22px;
+}
+
+/*
+#icon {
+  display: block;
+  margin: 0 auto;
+}
+*/
+
+#ask {
+  display: block;
+  margin: 0 auto;
+}
+
+#choices {
+  width: 90%;
+  overflow: auto;
+}
+
+#list {
+  white-space: nowrap;
+}
+
+#list li {
+  display: inline;
+  list-style-type: none;
+  cursor: pointer;
+}
+
+#list li:hover {
+  opacity: 0.5;
+}
