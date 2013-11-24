@@ -40,7 +40,7 @@ main.controller 'ChooseRPS', ($scope, sharedData) ->
     sharedData.choice = choice
     sharedData.view = 'partials/end.html'
 
-main.controller 'Final', ($scope, sharedData) ->
+main.controller 'Final', ($scope, sharedData, $http) ->
   $scope.name = sharedData.name
   $scope.choice = sharedData.choice
   select = ['rock', 'paper', 'scissors']
@@ -54,6 +54,13 @@ main.controller 'Final', ($scope, sharedData) ->
   if sharedData.choice is 'scissors' and $scope.comp is 'rock' then result = 'lose'
   if sharedData.choice is 'scissors' and $scope.comp is 'paper' then result = 'win'
   $scope.message = sharedData.name + ', you ' + result + '!'
+  $http.get('/api/players')
+  .success (data) -> 
+    console.log data
+    $http.post('/api/players', {text: 'text'})
+    .success (data) ->
+      console.log data
+
   $scope.click = ->
     sharedData.view = 'partials/choice.html'
 
