@@ -54,13 +54,16 @@ main.controller 'Final', ($scope, sharedData, $http) ->
   if sharedData.choice is 'scissors' and $scope.comp is 'rock' then result = 'lose'
   if sharedData.choice is 'scissors' and $scope.comp is 'paper' then result = 'win'
   $scope.message = sharedData.name + ', you ' + result + '!'
-  $http.get('/api/players')
-  .success (data) -> 
-    console.log data
-    $http.post('/api/players', {text: 'text'})
+#  $http.get('/api/players')
+#  .success (data) ->
+#    console.log 'Data: ' + data
+#  .error (err) ->
+#    console.log 'Error: ' + err
+  $http.post('/api/players', {name: sharedData.name})
     .success (data) ->
       console.log data
-
+    .error (err) ->
+      console.log err
   $scope.click = ->
     sharedData.view = 'partials/choice.html'
 
