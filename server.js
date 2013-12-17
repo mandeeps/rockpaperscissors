@@ -8,7 +8,7 @@
 
   mongoose = require('mongoose');
 
-  mongoose.connect('mongodb://127.0.0.1:27017/rps');
+  mongoose.connect(process.env('MONGOHQ_URL'));
 
   app.configure(function() {
     app.use(express["static"](__dirname + '/public'));
