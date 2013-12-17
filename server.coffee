@@ -54,5 +54,8 @@ db.once 'open', () ->
 			if err
 				res.send err
 
+	app.get '*', (req, res) ->
+		res.sendfile './public/index.html'
+
 	app.listen 8080
 	console.log 'running on 8080'

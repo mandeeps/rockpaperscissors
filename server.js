@@ -86,6 +86,9 @@
         }
       });
     });
+    app.get('*', function(req, res) {
+      return res.sendfile('./public/index.html');
+    });
     app.listen(8080);
     return console.log('running on 8080');
   });
