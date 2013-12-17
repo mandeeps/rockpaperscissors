@@ -8,7 +8,7 @@
 
   mongoose = require('mongoose');
 
-  mongoose.connect(process.env('MONGOHQ_URL'));
+  mongoose.connect(process.env.MONGOHQ_URL);
 
   app.configure(function() {
     app.use(express["static"](__dirname + '/public'));
@@ -86,8 +86,8 @@
         }
       });
     });
-    app.listen(8080);
-    return console.log('running on 8080');
+    app.listen(80);
+    return console.log('running on 80');
   });
 
 }).call(this);
