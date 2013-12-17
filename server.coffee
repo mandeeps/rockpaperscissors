@@ -2,7 +2,7 @@
 express = require 'express'
 app = express()
 mongoose = require 'mongoose'
-mongoose.connect process.env.MONGOHQ_URL #'mongodb://127.0.0.1:27017/rps'
+mongoose.connect 'mongodb://test:test@linus.mongohq.com:10083/rps' #'mongodb://127.0.0.1:27017/rps'
 
 app.configure ->
 	app.use express.static __dirname + '/public'
@@ -54,5 +54,5 @@ db.once 'open', () ->
 			if err
 				res.send err
 
-	app.listen 80
-	console.log 'running on 80'
+	app.listen 8080
+	console.log 'running on 8080'
