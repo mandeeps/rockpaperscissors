@@ -15,43 +15,44 @@ db.on 'error', console.error.bind console, 'connection error:'
 db.once 'open', () ->
 
 	Player = mongoose.model 'Player', 
-		name: String
+		name: String,
+		winCount: Number,
+		lossCount: Number,
+		tieCount: Number
 
+	app.put '/api/players/:person', (req, res) ->
+		console.log 'get request for one account'
+		console.log req.params
+		Player.findOne {'name': req.params.person}, (err, account) ->
+			if err
+				res.send err
+			else
+				if !account?
+					Player.create({
+						name: req.params.person,
+						winCount: 0,
+						lossCount: 0,
+						tieCount: 0
+					}, (err, account) ->
+						if err
+							res.send err
+					)
+				res.json account
+				console.log 'account: ' + account
+	
 	app.get '/api/players', (req, res) ->
-		Player.find (err, players) ->
+		Player.find {}, null, {sort: {winCount:-1}, limit:3}, (err, players) ->
 			if err
 				res.send err
-			res.json players 
-
-	app.post '/api/players', (req, res) ->
-		Player.create({
-			name: req.body.name,
-			done: false
-		}, (err, player) ->
-			if err
-				res.send err
-			Player.find (err, players) ->
-				if err
-					res.send err
-				res.send players
-		)
-
-		console.log req.body.name
-
-	app.delete '/api/players/:player_id', (req, res) ->
-		Player.remove
-			_id: req.params.player_id,
-		(err, player) ->
-			if err
-				res.send err
-
-		Player.find (err, players) ->
-			if err
-				res.send err
+				console.log err
 			res.json players
 
-	#app.get '*', (req, res) ->
-	#	res.sendfile './public/index.html'
+	app.post '/api/players', (req, res) ->
+		console.log 'update one account'
+		console.log req.body
+		Player.findOneAndUpdate {'name': req.body.name}, {$set: {winCount:req.body.winCount,lossCount:req.body.lossCount,tieCount:req.body.tieCount}}, (err, player) ->
+			if err
+				res.send err
 
 	app.listen 8080
 	console.log 'running on 8080'

@@ -24,47 +24,66 @@
   db.once('open', function() {
     var Player;
     Player = mongoose.model('Player', {
-      name: String
+      name: String,
+      winCount: Number,
+      lossCount: Number,
+      tieCount: Number
+    });
+    app.put('/api/players/:person', function(req, res) {
+      console.log('get request for one account');
+      console.log(req.params);
+      return Player.findOne({
+        'name': req.params.person
+      }, function(err, account) {
+        if (err) {
+          return res.send(err);
+        } else {
+          if (account == null) {
+            Player.create({
+              name: req.params.person,
+              winCount: 0,
+              lossCount: 0,
+              tieCount: 0
+            }, function(err, account) {
+              if (err) {
+                return res.send(err);
+              }
+            });
+          }
+          res.json(account);
+          return console.log('account: ' + account);
+        }
+      });
     });
     app.get('/api/players', function(req, res) {
-      return Player.find(function(err, players) {
+      return Player.find({}, null, {
+        sort: {
+          winCount: -1
+        },
+        limit: 3
+      }, function(err, players) {
         if (err) {
           res.send(err);
+          console.log(err);
         }
         return res.json(players);
       });
     });
     app.post('/api/players', function(req, res) {
-      Player.create({
-        name: req.body.name,
-        done: false
-      }, function(err, player) {
-        if (err) {
-          res.send(err);
+      console.log('update one account');
+      console.log(req.body);
+      return Player.findOneAndUpdate({
+        'name': req.body.name
+      }, {
+        $set: {
+          winCount: req.body.winCount,
+          lossCount: req.body.lossCount,
+          tieCount: req.body.tieCount
         }
-        return Player.find(function(err, players) {
-          if (err) {
-            res.send(err);
-          }
-          return res.send(players);
-        });
-      });
-      return console.log(req.body.name);
-    });
-    app["delete"]('/api/players/:player_id', function(req, res) {
-      Player.remove({
-        _id: req.params.player_id
-      });
-      (function(err, player) {
+      }, function(err, player) {
         if (err) {
           return res.send(err);
         }
-      });
-      return Player.find(function(err, players) {
-        if (err) {
-          res.send(err);
-        }
-        return res.json(players);
       });
     });
     app.listen(8080);
