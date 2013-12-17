@@ -2,7 +2,8 @@
 express = require 'express'
 app = express()
 mongoose = require 'mongoose'
-mongoose.connect 'mongodb://test:test@linus.mongohq.com:10083/rps' #'mongodb://127.0.0.1:27017/rps'
+mongoose.connect process.env.MONG #'mongodb://127.0.0.1:27017/rps'
+port = process.env.PORT || 8080
 
 app.configure ->
 	app.use express.static __dirname + '/public'
@@ -36,8 +37,10 @@ db.once 'open', () ->
 					}, (err, account) ->
 						if err
 							res.send err
+						res.json account
 					)
-				res.json account
+				else
+					res.json account
 				console.log 'account: ' + account
 	
 	app.get '/api/players', (req, res) ->
@@ -57,5 +60,5 @@ db.once 'open', () ->
 	app.get '*', (req, res) ->
 		res.sendfile './public/index.html'
 
-	app.listen 8080
-	console.log 'running on 8080'
+	app.listen port
+	console.log 'running on ' + port
