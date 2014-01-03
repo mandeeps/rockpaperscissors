@@ -60,9 +60,10 @@
               tieCount: 0
             }, function(err, account) {
               if (err) {
-                res.send(err);
+                return res.send(err);
+              } else {
+                return res.json(account);
               }
-              return res.json(account);
             });
           } else {
             res.json(account);
@@ -80,9 +81,10 @@
       }, function(err, players) {
         if (err) {
           res.send(err);
-          console.log(err);
+          return console.log(err);
+        } else {
+          return res.json(players);
         }
-        return res.json(players);
       });
     });
     app.post('/api/players', function(req, res) {

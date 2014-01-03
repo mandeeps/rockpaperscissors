@@ -48,7 +48,8 @@ db.once 'open', () ->
 					}, (err, account) ->
 						if err
 							res.send err
-						res.json account
+						else
+							res.json account
 					)
 				else
 					res.json account
@@ -59,7 +60,8 @@ db.once 'open', () ->
 			if err
 				res.send err
 				console.log err
-			res.json players
+			else
+				res.json players
 
 	app.post '/api/players', (req, res) ->
 		console.log 'update one account'
